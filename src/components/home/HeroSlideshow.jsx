@@ -5,22 +5,22 @@ import { ChevronLeft, ChevronRight, Heart, Download } from "lucide-react";
 
 const slides = [
   {
-    image: "/__generating__/img_d44bbca7ca4d.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/02615dcc9_generated_07d1a733.png",
     title: "Helping Humanity with Faith & Purpose",
     subtitle: "Building bridges of compassion and service across the globe",
   },
   {
-    image: "/__generating__/img_fb9c09b23bb1.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/eec486c82_generated_6aa1f1ec.png",
     title: "Supporting Orphans & Old Age Care",
     subtitle: "Providing love, shelter, and dignity to those in need",
   },
   {
-    image: "/__generating__/img_cd8dd3b3c973.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/657c8cfe2_generated_a367532c.png",
     title: "Spreading Awareness of Imam Mahdi (A.S.)",
     subtitle: "Illuminating hearts with knowledge and spiritual guidance",
   },
   {
-    image: "/__generating__/img_5a004a76e9c1.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/a770515e8_generated_d0dba116.png",
     title: "Join the Community Through Zahoor App",
     subtitle: "Connect, learn, and grow with the global Shia community",
   },

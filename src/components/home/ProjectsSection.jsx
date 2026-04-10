@@ -4,25 +4,25 @@ import { ArrowRight } from "lucide-react";
 
 const projects = [
   {
-    image: "/__generating__/img_cfdcdd3e08b4.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/972b0f496_generated_22536eea.png",
     title: "Food Distribution",
     description: "Regular food drives serving thousands of families in need across multiple regions.",
     tag: "Welfare",
   },
   {
-    image: "/__generating__/img_36118c2effc3.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/4f18ad0c6_generated_c2191887.png",
     title: "Majalis & Events",
     description: "Organizing spiritual gatherings, lectures, and community events throughout the year.",
     tag: "Spiritual",
   },
   {
-    image: "/__generating__/img_d9ab452531af.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/56b46b3c1_generated_c0392487.png",
     title: "Educational Help",
     description: "Scholarship programs and educational resources for students in underserved communities.",
     tag: "Education",
   },
   {
-    image: "/__generating__/img_b542928ac06d.png",
+    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/7ec2390dd_generated_e809d24c.png",
     title: "Community Outreach",
     description: "Door-to-door welfare initiatives and community engagement programs for lasting impact.",
     tag: "Community",

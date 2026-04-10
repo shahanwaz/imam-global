@@ -75,7 +75,7 @@ export default function ZahoorAppSection() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/__generating__/img_e901da7e189d.png"
+                src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/4ec4cd671_generated_52c65865.png"
                 alt="Zahoor App - Digital Platform for Shia Community"
                 className="w-full h-auto"
               />
