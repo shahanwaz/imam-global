@@ -9,11 +9,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* About */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-heading font-bold text-lg">IM</span>
-              </div>
-              <span className="font-heading font-bold text-xl">IMAM</span>
+            <div className="mb-4">
+              <img
+                src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/4eb4e013b_image.png"
+                alt="IMAM Logo"
+                className="h-14 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
               Imam Mahdi Awareness Mission — Serving humanity through faith, education, welfare, and community building. Guided by the light of Imam (A.S.).
@@ -65,9 +66,9 @@ export default function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-lg mb-4">Contact Us</h4>
             <ul className="space-y-2.5 text-white/60 text-sm">
-              <li>info@imammission.org</li>
-              <li>+1 (555) 123-4567</li>
-              <li>123 Faith Avenue, Community Center, NY 10001</li>
+              <li>info.zahoorfoundation@gmail.com</li>
+              <li>+98 9457031317</li>
+              <li>Qom، انتهای، بلوار پيامبر اعظم، HWM7+6FR, Iran</li>
             </ul>
             <div className="flex gap-3 mt-5">
               {/* Instagram */}

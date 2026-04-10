@@ -23,13 +23,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-lg">IM</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="font-heading font-bold text-lg text-foreground tracking-tight">IMAM</span>
-              <p className="text-[10px] text-muted-foreground leading-tight -mt-0.5">Imam Mahdi Awareness Mission</p>
-            </div>
+            <img
+              src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/4eb4e013b_image.png"
+              alt="IMAM Logo"
+              className="h-12 lg:h-14 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}

@@ -56,25 +56,25 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
-                    <p className="text-muted-foreground text-sm">info@imammission.org</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <p className="text-muted-foreground text-sm">info.zahoorfoundation@gmail.com</p>
+                    </div>
+                    </div>
+                    <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
+                    </div>
+                    <div>
                     <p className="font-semibold text-foreground">Phone</p>
-                    <p className="text-muted-foreground text-sm">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <p className="text-muted-foreground text-sm">+98 9457031317</p>
+                    </div>
+                    </div>
+                    <div className="flex gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
+                    </div>
+                    <div>
                     <p className="font-semibold text-foreground">Address</p>
-                    <p className="text-muted-foreground text-sm">123 Faith Avenue, Community Center<br />New York, NY 10001</p>
+                    <p className="text-muted-foreground text-sm">Qom، انتهای، بلوار پيامبر اعظم،<br />HWM7+6FR, Iran</p>
                   </div>
                 </div>
               </div>
