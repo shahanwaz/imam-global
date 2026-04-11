@@ -66,7 +66,7 @@ export default function ZahoorAppSection({ t }) {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/4ec4cd671_generated_52c65865.png"
+                src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/35147eb9f_ChatGPTImageApr11202603_23_58PM.png"
                 alt="Zahoor App"
                 className="w-full h-auto"
               />

@@ -9,9 +9,7 @@ async function detectLanguageByGeo() {
     const data = await res.json();
     const country = data.country_code;
     const middleEast = ["SA", "AE", "IQ", "IR", "KW", "BH", "QA", "OM", "YE", "JO", "LB", "SY", "EG", "MA", "DZ", "TN", "LY"];
-    if (country === "IN") return "hi";
     if (middleEast.includes(country)) return "ar";
-    if (country === "PK") return "ur";
     return "en";
   } catch {
     return "en";
