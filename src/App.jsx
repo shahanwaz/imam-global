@@ -13,6 +13,8 @@ import OurWork from './pages/OurWork';
 import Projects from './pages/Projects';
 import Donate from './pages/Donate';
 import Contact from './pages/Contact';
+import SuccessStories from './pages/SuccessStories';
+import StoryDetail from './pages/StoryDetail';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -48,6 +50,8 @@ const AuthenticatedApp = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/stories" element={<SuccessStories />} />
+        <Route path="/stories/:id" element={<StoryDetail />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

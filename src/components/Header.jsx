@@ -14,6 +14,7 @@ export default function Header({ lang, setLang, t }) {
     { label: t.nav.mission, path: "/mission" },
     { label: t.nav.ourWork, path: "/our-work" },
     { label: t.nav.projects, path: "/projects" },
+    { label: "Success Stories", path: "/stories" },
     { label: t.nav.donate, path: "/donate" },
     { label: t.nav.contact, path: "/contact" },
   ];
