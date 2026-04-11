@@ -3,31 +3,22 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Heart, Download } from "lucide-react";
 
-const slides = [
-  {
-    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/02615dcc9_generated_07d1a733.png",
-    title: "Helping Humanity with Faith & Purpose",
-    subtitle: "Building bridges of compassion and service across the globe",
-  },
-  {
-    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/eec486c82_generated_6aa1f1ec.png",
-    title: "Supporting Orphans & Old Age Care",
-    subtitle: "Providing love, shelter, and dignity to those in need",
-  },
-  {
-    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/657c8cfe2_generated_a367532c.png",
-    title: "Spreading Awareness of Imam Mahdi (A.S.)",
-    subtitle: "Illuminating hearts with knowledge and spiritual guidance",
-  },
-  {
-    image: "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/a770515e8_generated_d0dba116.png",
-    title: "Join the Community Through Zahoor App",
-    subtitle: "Connect, learn, and grow with the global Shia community",
-  },
+const slideImages = [
+  "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/02615dcc9_generated_07d1a733.png",
+  "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/eec486c82_generated_6aa1f1ec.png",
+  "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/657c8cfe2_generated_a367532c.png",
+  "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/04b5609d8_ChatGPTImageApr11202602_59_44PM.png",
 ];
 
-export default function HeroSlideshow() {
+export default function HeroSlideshow({ t }) {
   const [current, setCurrent] = useState(0);
+
+  const slides = [
+    { title: t.hero.slide1.title, subtitle: t.hero.slide1.subtitle },
+    { title: t.hero.slide2.title, subtitle: t.hero.slide2.subtitle },
+    { title: t.hero.slide3.title, subtitle: t.hero.slide3.subtitle },
+    { title: t.hero.slide4.title, subtitle: t.hero.slide4.subtitle },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -52,7 +43,7 @@ export default function HeroSlideshow() {
           className="absolute inset-0"
         >
           <img
-            src={slides[current].image}
+            src={slideImages[current]}
             alt={slides[current].title}
             className="w-full h-full object-cover"
           />
@@ -73,7 +64,7 @@ export default function HeroSlideshow() {
               className="max-w-2xl"
             >
               <span className="inline-block px-4 py-1.5 bg-accent/90 text-accent-foreground rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
-                Imam Mahdi Awareness Mission
+                {t.hero.badge}
               </span>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5">
                 {slides[current].title}
@@ -87,7 +78,7 @@ export default function HeroSlideshow() {
                   className="inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-accent-foreground rounded-lg font-semibold hover:bg-accent/90 transition-all shadow-lg hover:shadow-xl"
                 >
                   <Heart className="w-5 h-5" />
-                  Donate Now
+                  {t.hero.donateNow}
                 </Link>
                 <a
                   href="https://zahoorinc.com"
@@ -96,7 +87,7 @@ export default function HeroSlideshow() {
                   className="inline-flex items-center gap-2 px-7 py-3.5 bg-white/15 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/25 transition-all border border-white/20"
                 >
                   <Download className="w-5 h-5" />
-                  Download App
+                  {t.hero.downloadApp}
                 </a>
               </div>
             </motion.div>

@@ -1,46 +1,17 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
-const testimonials = [
-  {
-    name: "Ahmed Hassan",
-    role: "Community Member",
-    text: "IMAM has transformed our community. The orphan support program gave my nephew a second chance at education and a brighter future.",
-    rating: 5,
-  },
-  {
-    name: "Fatima Zahra",
-    role: "Volunteer",
-    text: "Working with IMAM has been the most fulfilling experience. The dedication to serving humanity in the light of Imam (A.S.) is truly inspiring.",
-    rating: 5,
-  },
-  {
-    name: "Ali Raza",
-    role: "Zahoor App User",
-    text: "The Zahoor App is incredible. I can access Majalis, ask questions to scholars, and stay connected with the community from anywhere in the world.",
-    rating: 5,
-  },
-];
-
-const stats = [
-  { number: "50+", label: "Countries Reached" },
-  { number: "10,000+", label: "Families Supported" },
-  { number: "500+", label: "Volunteers" },
-  { number: "100+", label: "Programs Running" },
-];
-
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ t }) {
   return (
     <section className="py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Impact Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
         >
-          {stats.map((stat, i) => (
+          {t.testimonials.stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -55,7 +26,6 @@ export default function TestimonialsSection() {
           ))}
         </motion.div>
 
-        {/* Testimonials */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,17 +33,17 @@ export default function TestimonialsSection() {
           className="text-center mb-14"
         >
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
-            Community Voices
+            {t.testimonials.badge}
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            What People Say
+            {t.testimonials.heading}
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((t, i) => (
+          {t.testimonials.items.map((item, i) => (
             <motion.div
-              key={t.name}
+              key={item.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -82,14 +52,14 @@ export default function TestimonialsSection() {
             >
               <Quote className="w-10 h-10 text-primary/10 absolute top-6 right-6" />
               <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, j) => (
+                {Array.from({ length: 5 }).map((_, j) => (
                   <Star key={j} className="w-4 h-4 text-accent fill-accent" />
                 ))}
               </div>
-              <p className="text-foreground leading-relaxed mb-6 relative z-10">"{t.text}"</p>
+              <p className="text-foreground leading-relaxed mb-6 relative z-10">"{item.text}"</p>
               <div>
-                <p className="font-heading font-semibold text-foreground">{t.name}</p>
-                <p className="text-muted-foreground text-sm">{t.role}</p>
+                <p className="font-heading font-semibold text-foreground">{item.name}</p>
+                <p className="text-muted-foreground text-sm">{item.role}</p>
               </div>
             </motion.div>
           ))}

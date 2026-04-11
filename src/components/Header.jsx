@@ -2,20 +2,21 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
-  { label: "Mission & Vision", path: "/mission" },
-  { label: "Our Work", path: "/our-work" },
-  { label: "Projects", path: "/projects" },
-  { label: "Donate", path: "/donate" },
-  { label: "Contact", path: "/contact" },
-];
-
-export default function Header() {
+export default function Header({ lang, setLang, t }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+
+  const navLinks = [
+    { label: t.nav.home, path: "/" },
+    { label: t.nav.about, path: "/about" },
+    { label: t.nav.mission, path: "/mission" },
+    { label: t.nav.ourWork, path: "/our-work" },
+    { label: t.nav.projects, path: "/projects" },
+    { label: t.nav.donate, path: "/donate" },
+    { label: t.nav.contact, path: "/contact" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
@@ -47,8 +48,9 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="flex items-center gap-3">
+          {/* Right side */}
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher lang={lang} setLang={setLang} />
             <a
               href="https://zahoorinc.com"
               target="_blank"
@@ -56,7 +58,7 @@ export default function Header() {
               className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
             >
               <Download className="w-4 h-4" />
-              Download Zahoor App
+              {t.nav.downloadApp}
             </a>
             <button
               className="lg:hidden p-2 rounded-md text-foreground hover:bg-muted"
@@ -99,7 +101,7 @@ export default function Header() {
                 className="flex items-center gap-2 px-4 py-3 mt-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold"
               >
                 <Download className="w-4 h-4" />
-                Download Zahoor App
+                {t.nav.downloadApp}
               </a>
             </nav>
           </motion.div>
