@@ -8,7 +8,7 @@ export default function IranSupportSection() {
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1584461178357-e2e3c63c4b28?w=1600&q=80')" }}
+        style={{ backgroundImage: "url('https://media.base44.com/images/public/69d8d0da330a3411105d20d1/04624a34b_Gemini_Generated_Image_uz3neyuz3neyuz3n.png')" }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/60" />
 
