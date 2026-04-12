@@ -1,30 +1,47 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, ChevronDown, Trophy } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header({ lang, setLang, t }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [achievementsOpen, setAchievementsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
   const navLinks = [
     { label: t.nav.home, path: "/" },
     { label: t.nav.about, path: "/about" },
     { label: t.nav.mission, path: "/mission" },
-    { label: t.nav.ourWork, path: "/our-work" },
-    { label: t.nav.projects, path: "/projects" },
-    { label: "Success Stories", path: "/stories" },
     { label: t.nav.donate, path: "/donate" },
     { label: t.nav.contact, path: "/contact" },
   ];
+
+  const achievementsLinks = [
+    { label: t.nav.projects, path: "/projects" },
+    { label: "Success Stories", path: "/stories" },
+    { label: t.nav.ourWork, path: "/our-work" },
+  ];
+
+  const isAchievementsActive = achievementsLinks.some((l) => location.pathname === l.path);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setAchievementsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <img
               src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/4eb4e013b_image.png"
               alt="IMAM Logo"
@@ -47,6 +64,47 @@ export default function Header({ lang, setLang, t }) {
                 {link.label}
               </Link>
             ))}
+
+            {/* Our Achievements Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setAchievementsOpen(!achievementsOpen)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isAchievementsActive
+                    ? "text-primary bg-primary/5"
+                    : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                }`}
+              >
+                <Trophy className="w-3.5 h-3.5" />
+                Our Achievements
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${achievementsOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {achievementsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 w-52 bg-white border border-border rounded-xl shadow-xl z-50 overflow-hidden"
+                  >
+                    {achievementsLinks.map((link) => (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setAchievementsOpen(false)}
+                        className={`flex items-center px-4 py-3 text-sm transition-colors hover:bg-primary/5 hover:text-primary ${
+                          location.pathname === link.path ? "text-primary bg-primary/5 font-semibold" : "text-foreground"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </nav>
 
           {/* Right side */}
@@ -59,7 +117,7 @@ export default function Header({ lang, setLang, t }) {
               className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
             >
               <Download className="w-4 h-4" />
-              {t.nav.downloadApp}
+              Zahoor App
             </a>
             <button
               className="lg:hidden p-2 rounded-md text-foreground hover:bg-muted"
@@ -95,6 +153,26 @@ export default function Header({ lang, setLang, t }) {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Achievements group */}
+              <div className="pt-2 pb-1">
+                <p className="px-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Our Achievements</p>
+                {achievementsLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-6 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      location.pathname === link.path
+                        ? "text-primary bg-primary/5"
+                        : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
               <a
                 href="https://zahoorinc.com"
                 target="_blank"
@@ -102,7 +180,7 @@ export default function Header({ lang, setLang, t }) {
                 className="flex items-center gap-2 px-4 py-3 mt-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold"
               >
                 <Download className="w-4 h-4" />
-                {t.nav.downloadApp}
+                Zahoor App
               </a>
             </nav>
           </motion.div>

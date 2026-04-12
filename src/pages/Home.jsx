@@ -7,6 +7,7 @@ import ProjectsSection from "../components/home/ProjectsSection";
 import ZahoorAppSection from "../components/home/ZahoorAppSection";
 import TestimonialsSection from "../components/home/TestimonialsSection";
 import CTASection from "../components/home/CTASection";
+import IranSupportSection from "../components/home/IranSupportSection";
 
 export default function Home() {
   const { t } = useOutletContext();
@@ -19,6 +20,7 @@ export default function Home() {
       <ProjectsSection t={t} />
       <ZahoorAppSection t={t} />
       <TestimonialsSection t={t} />
+      <IranSupportSection />
       <CTASection t={t} />
     </div>
   );
