@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Heart, Download } from "lucide-react";
 const slideImages = [
   "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/02615dcc9_generated_07d1a733.png",
   "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/eec486c82_generated_6aa1f1ec.png",
-  "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/657c8cfe2_generated_a367532c.png",
+  "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/7a3dac793_ChatGPTImageApr13202611_57_51AM.png",
   "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/04b5609d8_ChatGPTImageApr11202602_59_44PM.png",
 ];
 
