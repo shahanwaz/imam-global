@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Heart, Download } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 
 const slideImages = [
   "https://media.base44.com/images/public/69d8d0da330a3411105d20d1/02615dcc9_generated_07d1a733.png",
@@ -80,15 +80,7 @@ export default function HeroSlideshow({ t }) {
                   <Heart className="w-5 h-5" />
                   {t.hero.donateNow}
                 </Link>
-                <a
-                  href="https://zahoorinc.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white/15 backdrop-blur-sm text-white rounded-lg font-semibold hover:bg-white/25 transition-all border border-white/20"
-                >
-                  <Download className="w-5 h-5" />
-                  {t.hero.downloadApp}
-                </a>
+
               </div>
             </motion.div>
           </AnimatePresence>

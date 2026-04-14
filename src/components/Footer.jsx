@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, ExternalLink } from "lucide-react";
+import { Heart } from "lucide-react";
 
 export default function Footer({ t }) {
   const navLinks = [
@@ -14,7 +14,7 @@ export default function Footer({ t }) {
   return (
     <footer className="bg-foreground text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* About */}
           <div className="lg:col-span-1">
             <div className="mb-4">
@@ -42,20 +42,7 @@ export default function Footer({ t }) {
             </ul>
           </div>
 
-          {/* Zahoor App */}
-          <div>
-            <h4 className="font-heading font-semibold text-lg mb-4">{t.footer.zahoorApp}</h4>
-            <p className="text-white/60 text-sm leading-relaxed mb-4">{t.footer.zahoorAppText}</p>
-            <a
-              href="https://zahoorinc.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              {t.nav.downloadApp}
-            </a>
-          </div>
+
 
           {/* Contact */}
           <div>

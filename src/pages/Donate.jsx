@@ -112,7 +112,7 @@ export default function Donate() {
   };
 
   return (
-    <div className="min-h-screen bg-background" dir="ltr">
+    <div className="min-h-screen bg-background" dir={t.dir || "ltr"}>
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative bg-primary overflow-hidden py-20 lg:py-28 islamic-pattern">

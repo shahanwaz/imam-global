@@ -4,7 +4,6 @@ import AboutSection from "../components/home/AboutSection";
 import MissionVisionSection from "../components/home/MissionVisionSection";
 import OurWorkSection from "../components/home/OurWorkSection";
 import ProjectsSection from "../components/home/ProjectsSection";
-import ZahoorAppSection from "../components/home/ZahoorAppSection";
 import TestimonialsSection from "../components/home/TestimonialsSection";
 import CTASection from "../components/home/CTASection";
 import IranSupportSection from "../components/home/IranSupportSection";
@@ -18,7 +17,6 @@ export default function Home() {
       <MissionVisionSection t={t} />
       <OurWorkSection t={t} />
       <ProjectsSection t={t} />
-      <ZahoorAppSection t={t} />
       <TestimonialsSection t={t} />
       <IranSupportSection />
       <CTASection t={t} />

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Download, ChevronDown, Trophy } from "lucide-react";
+import { Menu, X, ChevronDown, Trophy } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -110,15 +110,6 @@ export default function Header({ lang, setLang, t }) {
           {/* Right side */}
           <div className="flex items-center gap-2">
             <LanguageSwitcher lang={lang} setLang={setLang} />
-            <a
-              href="https://zahoorinc.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
-            >
-              <Download className="w-4 h-4" />
-              Zahoor App
-            </a>
             <button
               className="lg:hidden p-2 rounded-md text-foreground hover:bg-muted"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -173,15 +164,7 @@ export default function Header({ lang, setLang, t }) {
                 ))}
               </div>
 
-              <a
-                href="https://zahoorinc.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-3 mt-2 bg-primary text-primary-foreground rounded-lg text-sm font-semibold"
-              >
-                <Download className="w-4 h-4" />
-                Zahoor App
-              </a>
+
             </nav>
           </motion.div>
         )}
