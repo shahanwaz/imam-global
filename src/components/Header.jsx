@@ -20,7 +20,7 @@ export default function Header({ lang, setLang, t }) {
 
   const achievementsLinks = [
     { label: t.nav.projects, path: "/projects" },
-    { label: "Success Stories", path: "/stories" },
+    { label: t.stories?.heading || "Success Stories", path: "/stories" },
     { label: t.nav.ourWork, path: "/our-work" },
   ];
 
@@ -76,7 +76,7 @@ export default function Header({ lang, setLang, t }) {
                 }`}
               >
                 <Trophy className="w-3.5 h-3.5" />
-                Our Achievements
+                {t.achievements || "Our Achievements"}
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${achievementsOpen ? "rotate-180" : ""}`} />
               </button>
 
@@ -147,7 +147,7 @@ export default function Header({ lang, setLang, t }) {
 
               {/* Achievements group */}
               <div className="pt-2 pb-1">
-                <p className="px-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Our Achievements</p>
+                <p className="px-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">{t.achievements || "Our Achievements"}</p>
                 {achievementsLinks.map((link) => (
                   <Link
                     key={link.path}
