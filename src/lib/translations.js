@@ -207,7 +207,6 @@ export const translations = {
       noFoundSubtext: "Try a different search or category.",
     },
     achievements: "Our Achievements",
-  },
     contact: {
       badge: "Reach Out",
       heading: "Contact Us",
