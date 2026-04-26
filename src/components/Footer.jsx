@@ -39,10 +39,13 @@ export default function Footer({ t }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link to="/stories" className="text-white/60 hover:text-accent text-sm transition-colors">
+                  {t.stories?.heading || "Success Stories"}
+                </Link>
+              </li>
             </ul>
           </div>
-
-
 
           {/* Contact */}
           <div>

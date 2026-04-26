@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Video, Sparkles, BookOpen, Star, Download } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Heart, Users, BookOpen, Globe, HandHeart } from "lucide-react";
 
-const featureIcons = [MessageCircle, Video, Sparkles, BookOpen, Star];
+const featureIcons = [Heart, Users, BookOpen, Globe, HandHeart];
 
 export default function ZahoorAppSection({ t }) {
+  const section = t.communityOutreach || {
+    badge: "Our Community Impact",
+    heading: "Connecting Communities Through Service",
+    text: "We connect communities worldwide through our welfare programs, educational initiatives, and spiritual guidance — bringing hope and support to those who need it most.",
+    features: ["Welfare Programs", "Educational Support", "Spiritual Guidance", "Community Events", "Global Outreach"],
+  };
+
   return (
     <section className="py-20 lg:py-28 bg-primary relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -20,16 +28,16 @@ export default function ZahoorAppSection({ t }) {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block px-4 py-1.5 bg-white/10 text-white rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
-              {t.zahoor.badge}
+              {section.badge}
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 leading-tight">
-              {t.zahoor.heading}
+              {section.heading}
             </h2>
-            <p className="text-white/80 text-lg leading-relaxed mb-8">{t.zahoor.text}</p>
+            <p className="text-white/80 text-lg leading-relaxed mb-8">{section.text}</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
-              {t.zahoor.features.map((label, i) => {
-                const Icon = featureIcons[i];
+              {section.features.map((label, i) => {
+                const Icon = featureIcons[i] || Heart;
                 return (
                   <motion.div
                     key={label}
@@ -46,15 +54,13 @@ export default function ZahoorAppSection({ t }) {
               })}
             </div>
 
-            <a
-              href="https://zahoorinc.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/donate"
               className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground rounded-xl font-bold text-lg hover:bg-accent/90 transition-all shadow-lg hover:shadow-xl"
             >
-              <Download className="w-5 h-5" />
-              {t.zahoor.cta}
-            </a>
+              <Heart className="w-5 h-5" />
+              {t.cta?.donate || "Donate Now"}
+            </Link>
           </motion.div>
 
           <motion.div
@@ -64,16 +70,28 @@ export default function ZahoorAppSection({ t }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://media.base44.com/images/public/69d8d0da330a3411105d20d1/be6f9043d_ChatGPTImageApr12202601_58_46PM.png"
-                alt="Zahoor App"
-                className="w-full h-auto drop-shadow-2xl"
-              />
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-accent text-accent-foreground px-6 py-3 rounded-xl shadow-lg">
-              <p className="font-bold text-lg">10K+</p>
-              <p className="text-xs opacity-80">{t.zahoor.users}</p>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: Heart, label: "Orphan Support", value: "2,000+", desc: "Children supported" },
+                { icon: Users, label: "Elder Care", value: "500+", desc: "Elderly cared for" },
+                { icon: BookOpen, label: "Education", value: "1,000+", desc: "Students helped" },
+                { icon: Globe, label: "Global Reach", value: "50+", desc: "Countries reached" },
+              ].map(({ icon: Icon, label, value, desc }, i) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i }}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 text-center"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-3">
+                    <Icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <p className="font-heading text-2xl font-bold text-white">{value}</p>
+                  <p className="text-white/60 text-xs mt-1">{desc}</p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>

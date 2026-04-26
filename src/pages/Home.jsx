@@ -18,7 +18,7 @@ export default function Home() {
       <OurWorkSection t={t} />
       <ProjectsSection t={t} />
       <TestimonialsSection t={t} />
-      <IranSupportSection />
+      <IranSupportSection t={t} />
       <CTASection t={t} />
     </div>
   );

@@ -80,7 +80,12 @@ export default function HeroSlideshow({ t }) {
                   <Heart className="w-5 h-5" />
                   {t.hero.donateNow}
                 </Link>
-
+                <Link
+                  to="/our-work"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-white/15 backdrop-blur-sm text-white border border-white/30 rounded-lg font-semibold hover:bg-white/25 transition-all"
+                >
+                  {t.hero.exploreWork || "Explore Our Work"}
+                </Link>
               </div>
             </motion.div>
           </AnimatePresence>
