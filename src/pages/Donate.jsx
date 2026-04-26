@@ -1,151 +1,137 @@
-import { useState } from "react";
-import { useOutletContext, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Heart, CheckCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { base44 } from "@/api/base44Client";
+import StepProgress from "../components/donate/StepProgress";
+import Step1DonationType from "../components/donate/Step1DonationType";
+import Step2Amount from "../components/donate/Step2Amount";
+import Step3Details from "../components/donate/Step3Details";
+import Step4OTP from "../components/donate/Step4OTP";
+import Step5Summary from "../components/donate/Step5Summary";
+import Step6Payment from "../components/donate/Step6Payment";
+import Step7Result from "../components/donate/Step7Result";
+import Step8Invoice from "../components/donate/Step8Invoice";
 
-const PRESET_AMOUNTS = [25, 50, 100, 250];
+const INITIAL_DATA = {
+  donationType: "",
+  amount: null,
+  customAmount: "",
+  currency: "USD",
+  name: "",
+  email: "",
+  mobile: "",
+  address: "",
+  country: "",
+};
 
 export default function Donate() {
   const { t } = useOutletContext();
-  const d = t.donate;
+  const [step, setStep] = useState(1);
+  const [data, setData] = useState(INITIAL_DATA);
+  const [transactionId, setTransactionId] = useState(null);
+  const [paymentFailed, setPaymentFailed] = useState(false);
 
-  const [selectedAmount, setSelectedAmount] = useState(50);
-  const [customAmount, setCustomAmount] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  // Auto-detect country and currency
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then((r) => r.json())
+      .then((info) => {
+        const countryName = info.country_name || "Unknown";
+        const currency = info.currency || "USD";
+        setData((prev) => ({ ...prev, country: countryName, currency }));
+      })
+      .catch(() => {});
+  }, []);
 
-  const finalAmount = customAmount || selectedAmount;
+  const update = (patch) => setData((prev) => ({ ...prev, ...patch }));
+  const next = () => setStep((s) => s + 1);
+  const back = () => setStep((s) => s - 1);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
+  const handlePaymentSuccess = async (txnId) => {
+    setTransactionId(txnId);
+    // Save transaction to database
+    try {
+      await base44.entities.DonationTransaction.create({
+        transaction_id: txnId,
+        donor_name: data.name,
+        donor_email: data.email,
+        donor_mobile: data.mobile,
+        donor_country: data.country,
+        donation_type: data.donationType,
+        amount: Number(data.customAmount || data.amount),
+        currency: data.currency,
+        status: "success",
+      });
+    } catch (_) {}
+    setStep(7);
   };
 
-  if (submitted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-secondary/30 px-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-card rounded-2xl shadow-xl p-10 max-w-md w-full text-center"
-        >
-          <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
-          <h2 className="font-heading text-3xl font-bold text-foreground mb-3">{d.thankYou}</h2>
-          <p className="text-muted-foreground mb-8">{d.thankYouText}</p>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all"
-          >
-            {d.returnHome}
-          </Link>
-        </motion.div>
-      </div>
-    );
-  }
+  const handlePaymentFailure = () => {
+    setPaymentFailed(true);
+    setStep(7);
+  };
+
+  const handleRetry = () => {
+    setPaymentFailed(false);
+    setStep(6);
+  };
+
+  const handleViewInvoice = () => setStep(8);
+
+  // Steps 7 and 8 get full-width treatment (no step bar)
+  const showProgress = step <= 6;
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="py-20 lg:py-28 bg-primary/5 islamic-pattern">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
-              {d.heroBadge}
-            </span>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-5">
-              {d.heroHeading}
-            </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{d.heroSubtext}</p>
-          </motion.div>
+    <div className="min-h-screen bg-background">
+      {/* Hero banner */}
+      <div className="bg-primary/5 islamic-pattern py-10 px-4 text-center border-b border-border">
+        <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+          {t.donate.heroBadge}
+        </span>
+        <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
+          {t.donate.heroHeading}
+        </h1>
+      </div>
+
+      {/* Wizard card */}
+      <div className="max-w-xl mx-auto px-4 py-10">
+        {showProgress && <StepProgress currentStep={step} />}
+
+        <div className="bg-card rounded-2xl shadow-xl border border-border p-6 sm:p-8 min-h-[420px]">
+          <AnimatePresence mode="wait">
+            {step === 1 && (
+              <Step1DonationType key="s1" data={data} onUpdate={update} onNext={next} />
+            )}
+            {step === 2 && (
+              <Step2Amount key="s2" data={data} onUpdate={update} onNext={next} onBack={back} />
+            )}
+            {step === 3 && (
+              <Step3Details key="s3" data={data} onUpdate={update} onNext={next} onBack={back} />
+            )}
+            {step === 4 && (
+              <Step4OTP key="s4" data={data} onNext={next} onBack={back} />
+            )}
+            {step === 5 && (
+              <Step5Summary key="s5" data={data} onNext={next} onBack={back} onEdit={(s) => setStep(s)} />
+            )}
+            {step === 6 && (
+              <Step6Payment key="s6" data={data} onSuccess={handlePaymentSuccess} onFailure={handlePaymentFailure} onBack={back} />
+            )}
+            {step === 7 && (
+              <Step7Result key="s7" data={data} transactionId={paymentFailed ? null : transactionId} onRetry={handleRetry} onViewInvoice={handleViewInvoice} />
+            )}
+            {step === 8 && (
+              <Step8Invoice key="s8" data={data} transactionId={transactionId} />
+            )}
+          </AnimatePresence>
         </div>
-      </section>
 
-      {/* Donation Form */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Form */}
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">{d.donateSectionHeading}</h2>
-
-              {/* Amount selection */}
-              <div className="mb-6">
-                <p className="text-sm font-medium text-foreground mb-3">{d.selectAmount}</p>
-                <div className="grid grid-cols-4 gap-2 mb-3">
-                  {PRESET_AMOUNTS.map((amt) => (
-                    <button
-                      key={amt}
-                      onClick={() => { setSelectedAmount(amt); setCustomAmount(""); }}
-                      className={`py-2.5 rounded-lg border text-sm font-semibold transition-all ${
-                        selectedAmount === amt && !customAmount
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border hover:border-primary hover:text-primary"
-                      }`}
-                    >
-                      ${amt}
-                    </button>
-                  ))}
-                </div>
-                <input
-                  type="number"
-                  placeholder={d.enterAmount}
-                  value={customAmount}
-                  onChange={(e) => { setCustomAmount(e.target.value); setSelectedAmount(null); }}
-                  className="w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                />
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  placeholder={d.fullNameLabel}
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  required
-                  className="w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                />
-                <input
-                  type="email"
-                  placeholder={d.emailLabel}
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  required
-                  className="w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                />
-                <textarea
-                  placeholder={d.messagePlaceholder}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  rows={3}
-                  className="w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary text-primary-foreground rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-lg"
-                >
-                  <Heart className="w-5 h-5" />
-                  {d.donateCta} {finalAmount ? `$${finalAmount}` : ""}
-                </button>
-                <p className="text-xs text-muted-foreground text-center">{d.disclaimer}</p>
-              </form>
-            </motion.div>
-
-            {/* Impact */}
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">{d.impactHeading}</h2>
-              <p className="text-muted-foreground mb-6">{d.impactSubtext}</p>
-              <div className="space-y-4">
-                {d.impacts.map((item) => (
-                  <div key={item.amount} className="flex items-center gap-4 p-4 bg-secondary/50 rounded-xl border border-border">
-                    <span className="font-heading text-xl font-bold text-primary w-16 flex-shrink-0">{item.amount}</span>
-                    <span className="text-foreground text-sm">{item.description}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+        {showProgress && (
+          <p className="text-center text-xs text-muted-foreground mt-5 flex items-center justify-center gap-1.5">
+            <span>🔒</span> Secure & Encrypted — Step {step} of 6
+          </p>
+        )}
+      </div>
     </div>
   );
 }

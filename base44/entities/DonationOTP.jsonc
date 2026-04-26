@@ -1,0 +1,23 @@
+{
+  "name": "DonationOTP",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "otp": {
+      "type": "string",
+      "title": "OTP Code"
+    },
+    "expiry": {
+      "type": "number",
+      "title": "Expiry Timestamp"
+    }
+  },
+  "required": [
+    "email",
+    "otp",
+    "expiry"
+  ]
+}

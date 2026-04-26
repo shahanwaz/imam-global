@@ -1,0 +1,57 @@
+{
+  "name": "DonationTransaction",
+  "type": "object",
+  "properties": {
+    "transaction_id": {
+      "type": "string",
+      "title": "Transaction ID"
+    },
+    "donor_name": {
+      "type": "string",
+      "title": "Donor Name"
+    },
+    "donor_email": {
+      "type": "string",
+      "title": "Donor Email"
+    },
+    "donor_mobile": {
+      "type": "string",
+      "title": "Donor Mobile"
+    },
+    "donor_country": {
+      "type": "string",
+      "title": "Country"
+    },
+    "donation_type": {
+      "type": "string",
+      "title": "Donation Type"
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount"
+    },
+    "currency": {
+      "type": "string",
+      "title": "Currency"
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "enum": [
+        "pending",
+        "success",
+        "failed"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "transaction_id",
+    "donor_name",
+    "donor_email",
+    "amount",
+    "currency",
+    "donation_type",
+    "status"
+  ]
+}
